@@ -53,7 +53,7 @@ exports.createBlogController = async(req,res) =>{
         // const session = await mongoose.startSession()
         // session.startTransaction()
         // await newBlog.save({session})
-        // existingUser.blogs.push(newBlog)
+        existingUser.blogs.push(newBlog)
         // await existingUser.save({session})
         // await session.commitTransaction()
         await newBlog.save();
@@ -99,6 +99,11 @@ exports.updateblogController = async(req,res)=>{
 
 // single blog
 exports.getBlogByidController = async(req,res)=>{
+  
+}
+
+// delete blog
+exports.deleteBlogController = async(req,res) =>{
     try {
         const blog = await blogModel
           // .findOneAndDelete(req.params.id)
@@ -118,7 +123,31 @@ exports.getBlogByidController = async(req,res)=>{
           error,
         });
       }
-}
+};
 
-// delete blog
-exports.deleteBlogController = () =>{}
+// GET user blog
+exports.userBlogController = async(req,res) =>{
+    try {
+        const userBlog = await userModel.findById(req.params.id).populate('blogs');
+        if (!userBlog) {
+            return res.status(404).send({
+              success: false,
+              message: "blogs not found with this id",
+            });
+          }
+          return res.status(200).send({
+            success: true,
+            message: "user blogs",
+            userBlog,
+          });
+        
+    } catch (error) {
+        console.log(error)
+        return res.status(400).send({
+            success: false,
+            message: "error in user blog",
+            error,
+        });
+        
+    }
+};
