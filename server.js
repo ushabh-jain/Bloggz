@@ -27,7 +27,7 @@ app.use('/api/v1/user', userRoutes);
 app.use('/api/v1/blogs', blogRoutes);
 
 
-const PORT = process.env.PORT || 3000
+const PORT = process.env.PORT || 8080
 app.listen(PORT,()=>{
     console.log(`chalda peya on ${process.env.DEV_MODE} port no ${PORT}`.bgCyan.white)
 });
