@@ -1,5 +1,6 @@
-import React, { useEffect, useState } from 'react'
-import axios from 'axios'
+import React, { useEffect, useState } from 'react';
+import axios from 'axios';
+import BlogCard from '../components/BlogCard';
 
 const Blogs = () => {
   const[blogs,setBlogs] = useState([]);
@@ -7,7 +8,7 @@ const Blogs = () => {
   // getblogs
   const getAllBlogs = async() => {
     try {
-      const{data} = await axios.get('/api/v1/blog/all-blog')
+      const{data} = await axios.get("/api/v1/blog/all-blog")
       if(data?.success){
         setBlogs(data?.blogs);
       }
@@ -19,8 +20,25 @@ const Blogs = () => {
     getAllBlogs();
   },[]);
   return (
-    <div>Blogs</div>
+
+    <div>
+    {blogs &&
+      blogs.map((blog) => (
+        <BlogCard
+          id={blog?._id}
+          isUser={localStorage.getItem("userId") === blog?.user?._id}
+          title={blog?.title}
+          description={blog?.description}
+          image={blog?.image}
+          username={blog?.user?.username}
+          time={blog.createdAt}
+        />
+      ))}
+  </div>
+    
+
+   
   )
 }
 
-export default Blogs
+export default Blogs;
