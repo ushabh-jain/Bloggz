@@ -37,6 +37,7 @@ const Header = () => {
 
                 <Tab  sx={{ margin: 1, color: "white" }} label= "Blogs" LinkComponent={Link} to ="/blog" />
                 <Tab  sx={{ margin: 1, color: "white" }} label= "My Blogs" LinkComponent={Link} to ="/my-blog" />
+                <Tab  sx={{ margin: 1, color: "white" }} label= "Create Blog" LinkComponent={Link} to ="/create-blog" />
 
               </Tabs>
           </Box>
