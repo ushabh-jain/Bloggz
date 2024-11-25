@@ -26,11 +26,12 @@ const CreateBlog = () => {
         title: inputs.title,
         description: inputs.description,
         image: inputs.image,
-        user: id,
+        userId: id,
       });
+      console.log(data)
       if (data?.success) {
         toast.success("Blog Created");
-        navigate("/my-blogs");
+        navigate("/my-blog");
       }
       
     } catch (error) {

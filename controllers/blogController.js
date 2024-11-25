@@ -53,10 +53,11 @@ exports.createBlogController = async(req,res) =>{
         // const session = await mongoose.startSession()
         // session.startTransaction()
         // await newBlog.save({session})
-        existingUser.blogs.push(newBlog)
+        existingUser.blogs.push(newBlog._id)
         // await existingUser.save({session})
         // await session.commitTransaction()
         await newBlog.save();
+        await existingUser.save();
         return res.status(201).send({
             success: true,
             message: "Blog Created!",
@@ -128,7 +129,9 @@ exports.deleteBlogController = async(req,res) =>{
 // GET user blog
 exports.userBlogController = async(req,res) =>{
     try {
+        console.log(req.params.id)
         const userBlog = await userModel.findById(req.params.id).populate('blogs');
+        console.log(userBlog)
         if (!userBlog) {
             return res.status(404).send({
               success: false,
