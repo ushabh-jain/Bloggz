@@ -6,7 +6,8 @@ import { authActions } from "../redux/store";
 import toast from "react-hot-toast";
 
 const Header = () => {
-    const isLogin = useSelector(state => state.isLogin);
+    let isLogin = useSelector(state => state.isLogin);
+    isLogin = isLogin || localStorage.getItem("userid"); 
     const dispatch = useDispatch();
     const navigate = useNavigate();
     const [value,setValue] = useState();

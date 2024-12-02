@@ -7,7 +7,7 @@ import toast from "react-hot-toast";
 
 const CreateBlog = () => {
   const navigate = useNavigate();
-  const id = localStorage.getItem("userId")
+  const id = localStorage.getItem("userId");
   const [inputs, setInputs] = useState({
     title: "",
     description: "",
